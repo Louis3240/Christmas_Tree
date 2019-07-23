@@ -1,0 +1,59 @@
+<!--    * -->
+<!--   *** -->
+<!--  ***** -->
+<!-- ******* -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>輸入聖誕樹的高度，然後用*組合出來</title>
+</head>
+
+<body>
+    <!-- 給人輸入高度參數，還要有建樹的事件 -->
+    <p>請輸入聖誕樹的高度：<input type="text" id="treeHeight"><button onclick="buildTree()">建樹</button></p>
+    <div id="tree"></div>
+    <script>
+        // ※ 注意要用全形的＊和全形的空白 ※
+        // 建樹建起來
+        function buildTree(){
+            // 因為懶所以將重複出現的設為height
+            var height =Number(document.getElementById("treeHeight").value) ;
+            
+            // 聖誕樹的內容先設為空
+            var leafs='';
+
+            // 為了找出每一列要有幾個空白先存最長者2n-1
+            var tot = 2*height-1;
+
+            // 雙層迴圈包起來，為了觀念釐清清楚直接從1開始
+            // 外層是高度
+            for(i=1;i<height+1;i++){
+                // 內層是每一列要有幾個空白幾個星
+                for(j=1;j<tot+1;j++){
+                    // 判斷星星前面跟後面要有空白
+                    if(j<=(tot-(2*i-1))/2||j>(tot+(2*i-1))/2){
+                        leafs+="　";
+                    }
+                    else{
+                        leafs +="＊";
+                    } 
+                }
+                leafs += "<br>";
+            }
+            document.getElementById("tree").innerHTML=leafs;
+        }
+        // 分解動作
+        // 1. 觀察列和星星數量的變化: 星星數量 = 最終列 + 最終列 - 1
+        //    1＝>1、2=>3、3=>5、4=>7、5=>9
+        // 2. 觀察列和空白數量的變化: 假設以四列舉例
+        //    第一列：1=>3、5=>7
+        //    第二列：1=>2、6=>7
+        //    第三列：1=>1、7=>7
+        //    第四列：
+        // 3. 觀察星星中間位置: 中間位置 = 最終列
+    </script>
+</body>
+
+</html>
